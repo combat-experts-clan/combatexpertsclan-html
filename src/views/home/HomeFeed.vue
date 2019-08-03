@@ -1,33 +1,17 @@
-<template>
-  <v-container grid-list-lg>
-    <v-layout wrap>
-      <v-flex
-        v-for="(card, index) in cards"
-        v-bind:key="card.title"
-        v-bind:class="flexSize(index)"
-      >
-        <v-card
-          v-bind:key="card.title"
-          v-bind:img="card.image"
-          min-height="15rem"
-          href="#"
-        >
-          <v-card-title>
-            <h1 class="display-2">{{ card.title }}</h1>
-          </v-card-title>
-          <v-card-text>
-            <p class="subtitle-1">{{ card.text }}</p>
-          </v-card-text>
-        </v-card>
-      </v-flex>
-    </v-layout>
-  </v-container>
-</template>
-
 <script>
+/**
+ * HomeFeed.vue
+ * Displays a matrix of cards to display landing page news and links.
+ */
 export default {
   name: "CardFeed",
   methods: {
+    /**
+     * Determine the correct property to apply according to the viewport size.
+     * Matrix is in the format of:  [    item, item    ]
+     *                              [ item, item, item ]
+     *                              [    item, item    ]
+     */
     flexSize: function(index) {
       return {
         md6: Math.floor(index % 5) === 0 || Math.floor(index % 5) === 1,
@@ -41,6 +25,9 @@ export default {
 
   data() {
     return {
+      /**
+       * Configure the objects to be displayed in the home feed.
+       */
       cards: [
         {
           id: 1,
@@ -78,3 +65,33 @@ export default {
   }
 };
 </script>
+
+<template>
+  <v-container grid-list-lg>
+    <v-layout wrap>
+      <!-- Iterate over available cards and display them. -->
+      <v-flex
+        v-for="(card, index) in cards"
+        v-bind:key="card.title"
+        v-bind:class="flexSize(index)"
+      >
+        <v-card
+          v-bind:key="card.title"
+          v-bind:img="card.image"
+          min-height="15rem"
+          href="#"
+        >
+          <!-- Card title -->
+          <v-card-title>
+            <h1 class="display-2">{{ card.title }}</h1>
+          </v-card-title>
+
+          <!-- Card text -->
+          <v-card-text>
+            <p class="subtitle-1">{{ card.text }}</p>
+          </v-card-text>
+        </v-card>
+      </v-flex>
+    </v-layout>
+  </v-container>
+</template>

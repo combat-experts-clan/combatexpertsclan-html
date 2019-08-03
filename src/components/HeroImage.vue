@@ -2,14 +2,13 @@
 /**
  * HeroImage.vue
  * Reusable "hero image"-type component to display a prominent message
- * to the user over a background image.
+ * over a background image.
  */
-
 export default {
   props: { text: String, image: String, height: Number },
   computed: {
     /**
-     * Computed property to apply the correct class according to the viewport size.
+     * Determine the correct class to apply according to the viewport size.
      */
     classes: function() {
       return {
