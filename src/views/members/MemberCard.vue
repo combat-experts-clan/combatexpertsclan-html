@@ -14,19 +14,76 @@ export default {
     };
   },
 
+  methods: {
+    /**
+     * Returns true if the user's rank is a leadership rank.
+     */
+    isLeader: function(id) {
+      return [1, 2].includes(id);
+    },
+
+    /**
+     * Returns true if the user's rank is a standard rank.
+     */
+    isMember: function(id) {
+      return [3, 4, 5].includes(id);
+    },
+
+    /**
+     * Returns true if the user's rank is a recruit rank.
+     */
+    isRecruit: function(id) {
+      return id === 6;
+    },
+
+    /**
+     * Returns a string containing the clan tag for a member, given an integer.
+     */
+    getClanTag: function(id) {
+      if (this.isLeader(id)) {
+        return "«CE»";
+      } else if (this.isMember(id)) {
+        return "=CE=";
+      } else {
+        return "-CE-";
+      }
+    }
+  },
+
   computed: {
     /**
      * Return a this.ranks array reversed without mutating the original.
      */
-    ranksDescending: function() {
-      return [...this.ranks].reverse();
+    rankHistoryReversed: function() {
+      return [...this.rankHistory].reverse();
+    },
+
+    /**
+     * Returns the user's clan tag.
+     */
+    clanTag: function() {
+      return this.getClanTag(this.rank.id);
+    },
+
+    /**
+     * Returns the user's name.
+     */
+    memberName: function() {
+      return this.member.name;
+    },
+
+    /**
+     * Returns the name of the user's rank.
+     */
+    rankName: function() {
+      return this.rank.name;
     }
   },
+
   props: {
-    name: String,
+    member: Object,
     rank: Object,
-    tag: String,
-    ranks: Array
+    rankHistory: Array
   }
 };
 </script>
@@ -48,7 +105,9 @@ export default {
         </v-flex>
         <v-flex xs8>
           <!-- User name -->
-          <v-card-title class="title">{{ tag + name }}</v-card-title>
+          <v-card-title class="title">
+            {{ clanTag + memberName }}
+          </v-card-title>
 
           <!-- User joined date -->
           <v-card-text class="caption pt-0">Joined: 01/01/2004 </v-card-text>

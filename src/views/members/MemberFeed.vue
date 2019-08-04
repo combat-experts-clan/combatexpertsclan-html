@@ -19,20 +19,9 @@ export default {
     },
 
     /**
-     * Generate the clan tag of a member of a given rank.
-     */
-    getClanTag: function(member) {
-      return [1, 2].includes(member.rank)
-        ? "«CE»"
-        : member.rank === 6
-        ? "-CE-"
-        : "=CE=";
-    },
-
-    /**
      * Return an alphabetically sorted list of all members.
      */
-    sortMembersAlphabetically: function(membersObject) {
+    getMembersSortedAlphabetically: function(membersObject) {
       return sortBy(membersObject, ["name"]);
     }
   },
@@ -68,12 +57,12 @@ export default {
 
   computed: {
     /**
-     * Returns which ranks have at least one associated members.
+     * Return ranks that have at least one member.
      */
-    ranksNotEmpty: function() {
-      let vm = this;
-      return vm.ranks.filter(rank =>
-        vm.members.some(member => member.rank === rank.id)
+    ranksContainingMembers: function() {
+      let _this = this;
+      return _this.ranks.filter(rank =>
+        _this.members.some(member => member.rank === rank.id)
       );
     },
 
@@ -93,7 +82,7 @@ export default {
 <template>
   <v-container grid-list-lg id="member-feed">
     <!-- Iterate over ranks which have at least one members. -->
-    <template v-for="rank in ranksNotEmpty">
+    <template v-for="rank in ranksContainingMembers">
       <v-layout pb-2 wrap v-bind:key="`${rank.name}Header`">
         <v-flex md12>
           <h1 :class="seperatorTextClass">{{ rank.name }}</h1>
@@ -102,7 +91,9 @@ export default {
       <v-layout mb-6 wrap v-bind:key="`${rank.name}Members`">
         <!-- Order the members alphabetically. -->
         <v-flex
-          v-for="member in sortMembersAlphabetically(getMembersByRank(rank.id))"
+          v-for="member in getMembersSortedAlphabetically(
+            getMembersByRank(rank.id)
+          )"
           v-bind:key="member.id"
           v-bind:md6="member.rank < 5"
           md4
@@ -110,8 +101,7 @@ export default {
         >
           <member-card
             class="member-card"
-            v-bind="member"
-            v-bind:tag="getClanTag(member)"
+            v-bind:member="member"
             v-bind:rank="rank"
           ></member-card>
         </v-flex>
