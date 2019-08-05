@@ -7,29 +7,25 @@ import { sortBy } from "lodash";
 
 export default {
   components: {
-    MemberCard: () => import("@/views/members/MemberCard")
+    TileView: () => import("./TileView"),
+    ListView: () => import("./ListView")
   },
 
   methods: {
     /**
-     * Get all members that match a given rank.
+     * Get all members that match a given rank, sorted alphabetically.
      */
-    getMembersByRank: function(rank) {
-      return this.members.filter(member => member.rank === rank);
-    },
-
-    /**
-     * Return an alphabetically sorted list of all members.
-     */
-    getMembersSortedAlphabetically: function(membersObject) {
-      return sortBy(membersObject, ["name"]);
+    getMembersByRank: function(rankIndex) {
+      return sortBy(this.members.filter(member => member.rank === rankIndex), [
+        "name"
+      ]);
     }
   },
 
   data: function() {
     return {
       /**
-       * Configure available ranks.
+       * Placeholder ranks.
        */
       ranks: [
         { id: 1, name: "Boss" },
@@ -41,8 +37,7 @@ export default {
       ],
 
       /**
-       * Configure the clan members.
-       * PLACEHOLDER DATA
+       * Placeholder clan members.
        */
       members: [
         { id: 1, name: "Addict", rank: 1 },
@@ -51,7 +46,12 @@ export default {
         { id: 4, name: "Ferno", rank: 4 },
         { id: 5, name: "Kradon", rank: 5 },
         { id: 6, name: "Wallaby", rank: 6 }
-      ]
+      ],
+
+      /**
+       * Configure the member feed type.
+       */
+      viewType: "tile"
     };
   },
 
@@ -64,57 +64,50 @@ export default {
       return _this.ranks.filter(rank =>
         _this.members.some(member => member.rank === rank.id)
       );
-    },
-
-    /**
-     * Determine the correct class to apply according to the viewport size.
-     */
-    seperatorTextClass: function() {
-      return {
-        "display-2": this.$vuetify.breakpoint.lgAndUp,
-        "display-1": this.$vuetify.breakpoint.mdAndDown
-      };
     }
   }
 };
 </script>
 
 <template>
-  <v-container grid-list-lg id="member-feed">
-    <!-- Iterate over ranks which have at least one members. -->
-    <template v-for="rank in ranksContainingMembers">
-      <v-layout pb-2 wrap v-bind:key="`${rank.name}Header`">
-        <v-flex md12>
-          <h1 :class="seperatorTextClass">{{ rank.name }}</h1>
-        </v-flex>
+  <div id="member-feed">
+    <!-- Change member view to list or tiles -->
+    <v-container>
+      <v-layout wrap justify-end>
+        <v-icon @click="viewType = 'tile'">apps</v-icon>
+        <!-- <v-icon @click="viewType = 'list'">view_list</v-icon> -->
       </v-layout>
-      <v-layout mb-6 wrap v-bind:key="`${rank.name}Members`">
-        <!-- Order the members alphabetically. -->
-        <v-flex
-          v-for="member in getMembersSortedAlphabetically(
-            getMembersByRank(rank.id)
-          )"
-          v-bind:key="member.id"
-          v-bind:md6="member.rank < 5"
-          md4
-          sm12
-        >
-          <member-card
-            class="member-card"
-            v-bind:member="member"
-            v-bind:rank="rank"
-          ></member-card>
-        </v-flex>
+    </v-container>
+
+    <!-- Members feed -->
+    <v-container grid-list-lg>
+      <v-layout v-for="rank in ranksContainingMembers" :key="rank.id">
+        <!-- View as tile -->
+        <tile-view
+          v-bind:members="getMembersByRank(rank.id)"
+          v-bind:rank="rank"
+          v-show="viewType === 'tile'"
+        ></tile-view>
       </v-layout>
-    </template>
-  </v-container>
+
+      <!-- View as list -->
+      <list-view
+        v-bind:members="members"
+        v-bind:ranks="ranks"
+        v-show="viewType === 'list'"
+      ></list-view>
+    </v-container>
+  </div>
 </template>
 
 <style lang="scss" scoped>
 #member-feed {
-  margin-top: 5rem;
-}
-.member-card {
-  margin: 0 0.5rem;
+  background-image: linear-gradient(
+      to bottom,
+      rgba(245, 246, 252, 0.068),
+      rgba(31, 4, 24, 0.73)
+    ),
+    url("../../assets/textures/dark-honeycomb.png");
+  background-repeat: repeat;
 }
 </style>

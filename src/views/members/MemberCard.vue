@@ -42,10 +42,10 @@ export default {
     getClanTag: function(id) {
       if (this.isLeader(id)) {
         return "«CE»";
-      } else if (this.isMember(id)) {
-        return "=CE=";
-      } else {
+      } else if (this.isRecruit(id)) {
         return "-CE-";
+      } else {
+        return "=CE=";
       }
     }
   },
@@ -95,43 +95,28 @@ export default {
         <v-flex xs4 class="ma-auto">
           <!-- User avatar -->
           <v-img
-            width="100px"
-            v-bind:src="
-              `https://icon2.kisspng.com/20180427/pzw/kisspng-halo-the-master-chief-collection-halo-combat-evo-5ae2edca5bccf7.816730541524821450376.jpg`
-            "
-            style="border-radius: 50%"
-            class="justify-content-center align-items-center"
+            v-bind:src="require('@/assets/chief-helmet.jpg')"
+            class="justify-content-center align-items-center avatar"
+            width="100%"
+            height="100%"
           ></v-img>
         </v-flex>
         <v-flex xs8>
           <!-- User name -->
-          <v-card-title class="title">
+          <v-card-title class="title pb-0">
             {{ clanTag + memberName }}
           </v-card-title>
 
           <!-- User joined date -->
-          <v-card-text class="caption pt-0">Joined: 01/01/2004 </v-card-text>
+          <v-card-text class="caption">{{ rankName }} </v-card-text>
 
-          <!-- Show actions if the rank is above member -->
-          <v-card-actions v-if="rank.id < 5">
+          <!-- Timeline action buttons, applied on users which have ranking history -->
+          <v-card-actions v-if="!isRecruit(rank.id)">
             <v-layout wrap>
-              <!-- Rank history button -->
-
               <v-flex sm-12 md-6>
-                <v-btn
-                  v-if="rank.id < 5"
-                  v-on:click="timeline = !timeline"
-                  color="primary"
-                >
+                <v-btn v-on:click="timeline = !timeline" color="primary">
                   <v-icon small>trending_up</v-icon>
                   <span>&nbsp;Rank History</span>
-                </v-btn>
-              </v-flex>
-
-              <!-- Contact button -->
-              <v-flex sm-12 md-6>
-                <v-btn color="red darken-4">
-                  <v-icon small>message</v-icon><span>&nbsp;Contact</span>
                 </v-btn>
               </v-flex>
             </v-layout>
@@ -167,3 +152,9 @@ export default {
     </v-container>
   </v-card>
 </template>
+
+<style lang="scss" scoped>
+.avatar {
+  border-radius: 50%;
+}
+</style>
