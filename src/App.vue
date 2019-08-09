@@ -11,7 +11,7 @@ export default {
 </script>
 
 <template>
-  <v-app v-bind:dark="dark">
+  <v-app>
     <base-toolbar v-on:drawer-click="drawer = !drawer"></base-toolbar>
     <router-view></router-view>
   </v-app>
