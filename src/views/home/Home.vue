@@ -6,7 +6,9 @@
 export default {
   components: {
     HeroImage: () => import("@/components/HeroImage"),
-    HomeFeed: () => import("@/views/home/HomeFeed")
+    HomeFeed: () => import("./HomeFeed"),
+    DiscordFeed: () => import("./DiscordFeed"),
+    TwitterFeed: () => import("./TwitterFeed")
   }
 };
 </script>
