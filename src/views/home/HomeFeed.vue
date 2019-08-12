@@ -69,11 +69,11 @@ export default {
       <!-- Iterate over available cards and display them. -->
       <v-flex
         v-for="(card, index) in cards"
-        v-bind:key="card.title"
+        v-bind:key="card.id"
         v-bind:class="flexSize(index)"
       >
         <v-card
-          v-bind:key="card.title"
+          v-bind:key="card.id"
           v-bind:img="card.image"
           min-height="15rem"
           href="#"
