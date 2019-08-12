@@ -4,21 +4,18 @@
  * Displays a matrix of cards to display landing page news and links.
  */
 export default {
-  name: "CardFeed",
+  name: "HomeFeed",
   methods: {
     /**
      * Determine the correct property to apply according to the viewport size.
-     * Matrix is in the format of:  [    item, item    ]
-     *                              [ item, item, item ]
-     *                              [    item, item    ]
+     * Matrix is in the format of:  [   item   |   item   ]
+     *                              [ item  | item | item ]
+     *                              [   item   |   item   ]
      */
     flexSize: function(index) {
       return {
-        md6: Math.floor(index % 5) === 0 || Math.floor(index % 5) === 1,
-        md4:
-          Math.floor(index % 5) === 2 ||
-          Math.floor(index % 5) === 3 ||
-          Math.floor(index % 5) === 4
+        md6: [0, 1].includes(Math.floor(index % 5)),
+        md4: [2, 3, 4].includes(Math.floor(index % 5))
       };
     }
   },
