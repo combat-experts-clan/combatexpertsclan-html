@@ -6,7 +6,7 @@
 export default {
   data: function() {
     return {
-      parallaxImage: require("@/assets/banners/reach-wp-wide.png")
+      parallaxImage: require("@/assets/wp/reach-wp-wide.png")
     };
   },
   components: {

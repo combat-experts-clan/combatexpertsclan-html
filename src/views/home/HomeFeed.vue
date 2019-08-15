@@ -28,16 +28,15 @@ export default {
       cards: [
         {
           id: 1,
-          title: "Join Now",
-          text: "Apply now to be among the most deadly of combat experts.",
-          image: "https://i.ytimg.com/vi/g3zXyuFQ-oc/maxresdefault.jpg"
+          title: "This Space For Sale",
+          text: "",
+          image: ""
         },
         {
           id: 2,
           title: "Game Night",
           text: "Capture the Flag, every Friday night at 8:00 PM EST.",
-          image:
-            "https://3.bp.blogspot.com/-cR_4U4RLuGU/UEsQkziAjdI/AAAAAAAAI64/PKIdsz4iKno/s1600/halo4-ctf-pistol-flag.jpg"
+          image: require("@/assets/home/race.jpg")
         },
         {
           id: 3,
