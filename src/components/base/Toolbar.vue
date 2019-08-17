@@ -84,8 +84,9 @@ export default {
           :key="item.title"
           :to="item.destination"
           text
-          >{{ item.title }}</v-btn
         >
+          {{ item.title }}
+        </v-btn>
       </v-toolbar-items>
 
       <!-- Show the name of the page that the user is currently on. -->
