@@ -2,11 +2,11 @@
   <v-container fluid pa-0>
     <header>
       <hero-image
-        :image="require('@/assets/wp/infinite-desert-grad-mute.jpg')"
+        :image="require('@/assets/wp/infinite-rings.jpg')"
         :height="250"
       >
         <v-container>
-          <v-layout row wrap justify-end>
+          <v-layout row wrap>
             <v-flex shrink>
               <h1 class="display-1">Recruiting Center</h1>
             </v-flex>
@@ -20,33 +20,43 @@
         <v-layout row wrap>
           <v-flex mx-5>
             <v-form>
-              <h1 class="display-1 my-3 mb-5">About Me</h1>
+              <h1 class="display-1 py-3">About Me</h1>
 
               <!-- Clan name -->
               <v-text-field
                 label="Desired Clan Name"
+                hint="This is the nickname that you will be using in-game."
+                :placeholder="namePlaceholder"
                 :prefix="tagPrefix"
-                @focus="tagPrefix = '=CE='"
-                @blur="tagPrefix = ''"
+                @focus="
+                  tagPrefix = '=CE=';
+                  namePlaceholder = randomName;
+                "
+                @blur="
+                  tagPrefix = '';
+                  namePlaceholder = '';
+                "
+                class="my-3"
                 filled
               ></v-text-field>
-              <p>This is the nickname that you will be using in-game.</p>
 
               <!-- Discord ID -->
               <v-text-field
                 label="Discord"
+                hint="We communicate primarily via Discord."
                 :placeholder="discordPlaceholder"
-                @focus="discordPlaceholder = 'Discord#1234'"
+                @focus="discordPlaceholder = randomName + '#1337'"
                 @blur="discordPlaceholder = ''"
+                class="my-3"
                 filled
               ></v-text-field>
-              <p class="subtitle-1">We communicate primarily via Discord.</p>
 
               <!-- Flag question -->
-              <v-textarea
-                label="If you and your teammate were in a hopeless firefight next to the flag, you would..."
-                filled
-              ></v-textarea>
+              <p>
+                If you and your teammate were in a hopeless firefight next to
+                the flag, you would...
+              </p>
+              <v-textarea filled></v-textarea>
 
               <!-- Hack/cheat -->
               <p>
@@ -54,19 +64,30 @@
                 over others during online play?
               </p>
 
-              <v-radio-group row>
-                <v-radio label="No"></v-radio>
-                <v-radio label="Yes"></v-radio>
+              <v-radio-group row class="my-3">
+                <v-radio label="No" @change="cheatExplain = false"></v-radio>
+                <v-radio label="Yes" @change="cheatExplain = true"></v-radio>
               </v-radio-group>
-              <p class="subtitle-1">We are an integrity-based clan.</p>
+
+              <transition name="fade">
+                <v-text-field
+                  v-show="cheatExplain"
+                  label="Please explain"
+                  hint="We are an integrity-based clan."
+                  class="my-3"
+                  filled
+                ></v-text-field>
+              </transition>
 
               <!-- About me -->
-              <v-textarea label="Tell us a little bit about yourself">
+              <p>Tell us a little bit about yourself</p>
+              <v-textarea
+                hint="We look for people that represent themselves well, and we would
+                like to know who's going to be with us. Who are you?"
+                class="my-3"
+                filled
+              >
               </v-textarea>
-              <p class="subtitle-1">
-                We look for people that represent themselves well, and we would
-                like to know who's going to be with us. Who are you?
-              </p>
             </v-form>
           </v-flex>
         </v-layout>
@@ -87,6 +108,9 @@
  * Home.vue
  * Parent component for the landing page.
  */
+
+import { sample } from "lodash";
+
 export default {
   components: {
     HeroImage: () => import("@/components/HeroImage")
@@ -94,10 +118,58 @@ export default {
 
   data() {
     return {
-      discordUrl: `${process.env.VUE_APP_DISCORD_INVITE_URL}`,
       tagPrefix: "",
-      discordPlaceholder: ""
+      discordPlaceholder: "",
+      randomName: "",
+      cheatExplain: false
     };
+  },
+
+  mounted() {
+    this.randomName = this.generateRandomName();
+  },
+
+  methods: {
+    generateRandomName: function() {
+      return sample([
+        "Donut",
+        "Penguin",
+        "Stumpy",
+        "Whicker",
+        "Shadow",
+        "Howard",
+        "Wilshire",
+        "Darling",
+        "Disco",
+        "Jack",
+        "The Bear",
+        "Sneak",
+        "Whisp",
+        "Wheezy",
+        "Crazy",
+        "Goat",
+        "Pirate",
+        "Saucy",
+        "Hambone",
+        "Butcher",
+        "Snake",
+        "Caboose",
+        "Sleepy",
+        "Stompy",
+        "Mopey",
+        "Dopey",
+        "Weasel",
+        "Ghost",
+        "Dasher",
+        "Grumpy",
+        "Hollywood",
+        "Tooth",
+        "Noodle",
+        "Cupid",
+        "Prancer",
+        "Wallaby"
+      ]);
+    }
   },
 
   computed: {
@@ -123,5 +195,13 @@ export default {
 }
 #hero-content {
   align-items: center;
+}
+
+.fade-enter-active,
+.fade-leave-active {
+  transition: opacity 0.5s;
+}
+.fade-enter, .fade-leave-to /* .fade-leave-active below version 2.1.8 */ {
+  opacity: 0;
 }
 </style>
