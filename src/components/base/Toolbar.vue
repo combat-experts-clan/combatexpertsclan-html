@@ -59,7 +59,7 @@ export default {
 </script>
 
 <template>
-  <v-layout>
+  <v-layout style="max-height: 4rem;">
     <!-- Toolbar wrapper element. -->
     <v-app-bar color="dark" app flat>
       <!-- Configure the background image shown in the toolbar. -->
