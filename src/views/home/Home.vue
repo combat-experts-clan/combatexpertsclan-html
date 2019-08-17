@@ -13,8 +13,10 @@
                 Strength, Determination, Merciless, Forever.
               </h1>
             </v-flex>
+          </v-layout>
 
-            <!-- Hero caption -->
+          <!-- Hero caption -->
+          <v-layout row text-center justify-center align-center>
             <v-flex md6 sm9 xs12>
               <p class="subtitle-1 ma-3">
                 We are all here because we have an addiction to the greatest
@@ -22,10 +24,14 @@
                 international group of individuals who share this interest.
               </p>
             </v-flex>
+          </v-layout>
 
-            <!-- Hero link buttons -->
+          <!-- Hero link buttons -->
+          <v-layout row text-center justify-center align-center>
             <v-flex xs12>
-              <v-btn class="mx-1 my-3" href="/recruiting">Join Now</v-btn>
+              <v-btn class="mx-1 my-3" href="/recruiting">
+                Join Now
+              </v-btn>
               <v-btn class="mx-1 my-3 blue darken-4" :href="discordUrl">
                 Join Discord
               </v-btn>
