@@ -17,9 +17,9 @@ export default {
        */
       toolbarItems: [
         { title: "Home", destination: "/home" },
-        { title: "Members", destination: "/members" },
         { title: "Recruiting", destination: "/recruiting" },
-        { title: "Charter", destination: "/charter" }
+        { title: "Charter", destination: "/charter" },
+        { title: "Members", destination: "/members" }
       ],
 
       /**
@@ -31,14 +31,27 @@ export default {
        * Configure the items available in the navigation drawer.
        */
       drawerItems: [
-        { title: "Home", icon: "dashboard", destination: "/home" },
-        { title: "Members", icon: "question_answer", destination: "/members" },
+        {
+          title: "Home",
+          icon: "dashboard",
+          destination: "/home"
+        },
         {
           title: "Recruiting",
           icon: "question_answer",
           destination: "/recruiting"
         },
-        { title: "Charter", icon: "question_answer", destination: "/charter" }
+
+        {
+          title: "Charter",
+          icon: "question_answer",
+          destination: "/charter"
+        },
+        {
+          title: "Members",
+          icon: "question_answer",
+          destination: "/members"
+        }
       ]
     };
   }
