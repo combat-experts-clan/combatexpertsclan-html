@@ -76,11 +76,13 @@ export default {
 
       <!-- Configure the application title. -->
       <v-toolbar-title class="align-self-center">
-        <v-img
-          :src="require('@/assets/logos/icon.png')"
-          width="75px"
-          height="75px"
-        ></v-img>
+        <router-link to="/home">
+          <v-img
+            :src="require('@/assets/logos/icon.png')"
+            width="75px"
+            height="75px"
+          ></v-img>
+        </router-link>
       </v-toolbar-title>
 
       <!-- Right side elements. -->
