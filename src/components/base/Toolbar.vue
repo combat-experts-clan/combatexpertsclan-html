@@ -61,7 +61,7 @@ export default {
 <template>
   <v-layout>
     <!-- Toolbar wrapper element. -->
-    <v-app-bar color="dark" flat>
+    <v-app-bar color="dark" app flat>
       <!-- Configure the background image shown in the toolbar. -->
       <template v-slot:img="{ props }">
         <v-img v-bind="props" position="center top"></v-img>
