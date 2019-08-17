@@ -29,7 +29,7 @@
           <!-- Hero link buttons -->
           <v-layout row text-center justify-center align-center>
             <v-flex xs12>
-              <v-btn class="mx-1 my-3" href="/recruiting">
+              <v-btn class="mx-1 my-3" to="/recruiting">
                 Join Now
               </v-btn>
               <v-btn class="mx-1 my-3 blue darken-4" :href="discordUrl">
