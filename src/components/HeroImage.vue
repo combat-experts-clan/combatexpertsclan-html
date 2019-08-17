@@ -2,9 +2,7 @@
   <v-layout>
     <v-flex>
       <v-parallax :src="image" :height="height">
-        <v-layout align-center justify-center column>
-          <slot></slot>
-        </v-layout>
+        <slot></slot>
       </v-parallax>
     </v-flex>
   </v-layout>
