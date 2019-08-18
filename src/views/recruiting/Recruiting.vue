@@ -45,7 +45,7 @@
                 label="Discord"
                 hint="We communicate primarily via Discord."
                 :placeholder="discordPlaceholder"
-                @focus="discordPlaceholder = randomName + '#1337'"
+                @focus="discordPlaceholder = randomDiscord"
                 @blur="discordPlaceholder = ''"
                 class="my-3"
                 filled
@@ -112,7 +112,7 @@
  * Parent component for the landing page.
  */
 
-import { sample } from "lodash";
+import { sample, random } from "lodash";
 
 export default {
   components: {
@@ -214,6 +214,7 @@ export default {
 
   mounted() {
     this.randomName = this.generateRandomName();
+    this.randomDiscord = `${this.randomName}#${random(1111, 9999)}`;
   },
 
   methods: {
