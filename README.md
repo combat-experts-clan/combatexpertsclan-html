@@ -2,10 +2,11 @@
 
 ## Environment requirements
 
-* NodeJS
+* NodeJS, npm
 
 ## Installation
 
 * Clone the project.
-* From inside of the front-end project folder, run `npm install`.
-* Serve the application locally with `npm run serve`, or compile the assets using `npm run build` to serve using web server.
+* Install project dependencies with `npm install` or `npm install --production` for production.
+* Run `cp .env.template .env.local` and configure the new file as needed.
+* Serve the application locally for development with `npm run serve`, or compile the assets using `npm run build` to serve using an HTTP server.  Compiled assets are copied to `/dist`.
