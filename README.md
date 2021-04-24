@@ -2,14 +2,23 @@
 
 ## Environment requirements
 
-* npm, docker (optional)
+* docker
 
 ## Installation with Docker
 
-1. As needed, download node docker image using `docker pull node`
-2. Create docker instance from node using `docker run -d -t -p 8080:8080 --name website node`
-3. Open a shell to the docker instance with `docker exec -it website bash`
-4. Create a new directory and clone this repository.
-5. Install project dependencies with `npm install` or `npm install --production` for production.
-6. Run `cp .env.template .env.local` and configure the new file as needed.
-7. Serve the application locally for development with `npm run serve`, or compile the assets using `npm run build`
+1.  Clone the project.
+2.  Copy `.env.template` to `.env.local` and configure application settings as required.
+3.  Build docker image using `docker build -t combat-experts-frontend .`
+4.  Run docker container using `docker run -d -t -p 8080:8080 --name frontend combat-experts-frontend`
+
+Quickly serve the project:
+
+1.  Access the container using `docker exec -it frontend sh`
+2.  Serve the project by using `npm run serve`
+4.  Access the project at `localhost:8080`
+
+Compile the project to static assets:
+
+1.  Access the container using `docker exec -it frontend sh`
+2.  Compile the project by using `npm run build`
+3.  Assets can be found at `/dist`
