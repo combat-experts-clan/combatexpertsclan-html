@@ -1,0 +1,14 @@
+version: '3.9'
+services:
+  web:
+    build: .
+    image: combatexperts-vue:0.0.1
+    container_name: combatexperts-vue
+    ports:
+    - 8080:80
+    networks:
+      web:
+  
+networks:
+  web:
+    name: web
